@@ -12,7 +12,7 @@ Cool Features:
 
 
 Future Plans:
- [ ] - Close SQLite queries
+ [x] - Close SQLite queries
  [ ] - Use the wildcard operator to get the first 4 matches.
  [ ] - Move the name/color guide off the graph and to jLabels in the bottom panel
 
@@ -20,3 +20,4 @@ Future Plans:
 Versions:
 
 1.0.0 Initial Release
+1.0.1 SQL queries are properly closed

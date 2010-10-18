@@ -11,7 +11,6 @@ import java.sql.*;
  * @author nathan
  */
 public class NameListSQL {
-    //ArrayList<NameRecord> names = new ArrayList<NameRecord>();
 
     private Statement stmt;
     private Connection conn = null;
@@ -20,6 +19,8 @@ public class NameListSQL {
 
     public NameListSQL() throws Exception {
         initializeDB();
+  Class.forName("org.sqlite.JDBC");
+
     }
 
     public static Connection getConnection() throws Exception {
@@ -40,9 +41,10 @@ public class NameListSQL {
         query = conn.prepareStatement("SELECT id FROM names WHERE name LIKE ? LIMIT 1");
         query.setString(1, name);
         rset = query.executeQuery();
+        int ret = rset.getInt(1);
+        conn.close();
 
-
-        return rset.getInt(1);
+        return ret;
     }
 
     public String getName(int id) throws Exception {
@@ -51,8 +53,10 @@ public class NameListSQL {
         query = conn.prepareStatement(qString);
         query.setInt(1, id);
         rset = query.executeQuery();
+        String ret = rset.getString(1);
+        conn.close();
 
-        return rset.getString(1);
+        return ret;
     }
 
     public int getRank(int id, int decade) throws Exception {
@@ -61,8 +65,10 @@ public class NameListSQL {
         PreparedStatement sQ = conn.prepareStatement("SELECT * FROM names WHERE id = ?");
         sQ.setInt(1, id);
         rset = sQ.executeQuery();
+        int ret = rset.getInt("f"+decade);
+        conn.close();
 
-        return rset.getInt("f" + decade);
+        return ret;
     }
 
 }
